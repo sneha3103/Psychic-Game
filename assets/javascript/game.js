@@ -27,7 +27,7 @@ var computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.leng
 // When user presses a key, it should populate in the html site. 
  document.onkeyup = function(event) {
         var letterPicked = String.fromCharCode(event.keyCode).toLowerCase(); 
-        document.getElementById("userguesses").innerHTML= userInput;
+        document.getElementById("userguesses").innerHTML= "Your Guesses so far: " + userInput;
 
     }
     //If user input equals to computer choice, then increase the win count by 1. Otherwise, Your guesses left decreases by 1. 
