@@ -24,22 +24,61 @@ var computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.leng
 
 
 //This array holds the incorrect letters that the user has been guessing.
- var incorrectLetter = [];
+//  var incorrectLetter = [];
 
  // When user presses a key, it should populate in the html site. 
- document.onkeyup = function(event) {
-        var letterPicked = String.fromCharCode(event.keyCode).toLowerCase(); 
+//  document.onkeyup = function(event) {
+//         var letterPicked = String.fromCharCode(event.keyCode).toLowerCase(); 
     
-         //push the letterpicked into array of incorrect letters 
-        incorrectLetter.push(letterPicked);
-        console.log(incorrectLetter);
+//          //push the letterpicked into array of incorrect letters 
+//         incorrectLetter.push(letterPicked);
+//         console.log(incorrectLetter);
 
-        document.getElementById("userguesses").innerHTML= "Your Guesses so far: " + incorrectLetter.join(' , ');
+//         document.getElementById("userguesses").innerHTML= "Your Guesses so far: " + incorrectLetter.join(' , ');
 
-        if (guessedLetters.indexOf(userInput) < 0 && letterChoices.indexOf(userInput)  >= 0) {
-           guessedLetters[guessedLetters.length]=userGuess;
-           guessesLeft--;
-        }
+//         if (guessedLetters.indexOf(userInput) < 0 && letterChoices.indexOf(userInput)  >= 0) {
+//            guessedLetters[guessedLetters.length]=userGuess;
+//            guessesLeft--;
+//         }
+
+
+
+ document.onkeyup = function(event) {
+     var userInput = String.fromCharCode(event.keyCode).toLowerCase();
+     var computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+     guessedLetters.push(userInput);
+     console.log(guessedLetters);
+     document.getElementById("userguesses").innerHTML= "Your Guesses so far: " + guessedLetters.join(' , ');
+     if (userInput == computerChoice) {
+         winsCount++;
+         console.log("Yay! You won!");
+         alert("Woohoo! You Won!");
+         guessedLetters = [];
+         guessesLeft = 9;
+        //  computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+            console.log("Wins: " + winsCount + "Losses: " + lossesCount + "Guesses Left: " + guessesLeft + "Your Guesses so far: " + guessedLetters + "Computer Choice: " + computerChoice);
+            
+
+        //  document.querySelector("#wins1").innerHTML = "Wins: " + winsCount;
+        document.getElementById("wins1").innerHTML = "Wins: " + winsCount;
+     }
+     else if (guessesLeft == 0) {
+         lossesCount++;
+         console.log("You lost :( Try again!");
+         alert("Boo. Let\s try again");
+         guessedLetters = [];
+         guessesLeft = 9;
+         computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+            console.log("Wins: " + winsCount + "Losses: " + lossesCount + "Guesses Left: " + guessesLeft + "Your Guesses so far: " + guessedLetters + "Computer Choice: " + computerChoice);
+
+         document.getElementById("losses1").innerHTML = "Losses: " + lossesCount;
+     }
+     else if (userInput !== computerChoice) {
+         guessesLeft--;
+
+         document.getElementById("guesses1").innerHTML=  "Guesses Left: " + guessesLeft;
+     }
+ }
   
 
 
@@ -47,40 +86,40 @@ var computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.leng
         
         //If user input equals to computer choice, then increase the win count by 1. Then, the number of remaining guesses left (guessesLeft) gets reset as well as the letters that the user has already guessed(guessedLetters). The computer will then pick another letter. 
 
-         if (userInput == computerChoice) {
-             winsCount ++;
-            console.log("Yay! You won!");
-            guessedLetters = [];
-            guessesLeft = 9;
-            computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
-            console.log("Wins: " + winsCount + "Losses: " + lossesCount + "Guesses Left: " + guessesLeft + "Your Guesses so far: " + guessedLetters + "Computer Choice: " + computerChoice);
+        //  if (userInput == computerChoice) {
+        //      winsCount ++;
+        //     console.log("Yay! You won!");
+        //     guessedLetters = [];
+        //     guessesLeft = 9;
+        //     computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+        //     console.log("Wins: " + winsCount + "Losses: " + lossesCount + "Guesses Left: " + guessesLeft + "Your Guesses so far: " + guessedLetters + "Computer Choice: " + computerChoice);
 
-        } 
+        // } 
 
         
 
           
-        //If guesses left = 0, then the Losses will increase by 1. Then, the number of remaining guesses left (guessesLeft) gets reset as well as the letters that the user has already guessed(guessedLetters). And then the computer will begin to pick another letter. 
+        // //If guesses left = 0, then the Losses will increase by 1. Then, the number of remaining guesses left (guessesLeft) gets reset as well as the letters that the user has already guessed(guessedLetters). And then the computer will begin to pick another letter. 
 
-         if (guessesLeft == 0){
-            lossesCount++;
-            console.log("You lost :( Try again!");
-            guessedLetters = [];
-            guessesLeft = 9;
-            computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
-            console.log("Wins: " + winsCount + "Losses: " + lossesCount + "Guesses Left: " + guessesLeft + "Your Guesses so far: " + guessedLetters + "Computer Choice: " + computerChoice);
+        //  if (guessesLeft == 0){
+        //     lossesCount++;
+        //     console.log("You lost :( Try again!");
+        //     guessedLetters = [];
+        //     guessesLeft = 9;
+        //     computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+        //     console.log("Wins: " + winsCount + "Losses: " + lossesCount + "Guesses Left: " + guessesLeft + "Your Guesses so far: " + guessedLetters + "Computer Choice: " + computerChoice);
 
-        }
+        // }
  
 
 
      //This gets my element from my html and adds the java functions to it
-     document.getElementById("wins1").innerHTML = "Wins: " + winsCount;
-     document.getElementById("losses1").innerHTML = "Losses: " + lossesCount;
-     document.getElementById("guesses1").innerHTML=  "Guesses Left: " + guessesLeft;
+    //  document.getElementById("wins1").innerHTML = "Wins: " + winsCount;
+    //  document.getElementById("losses1").innerHTML = "Losses: " + lossesCount;
+    //  document.getElementById("guesses1").innerHTML=  "Guesses Left: " + guessesLeft;
 
          
-         document.querySelector("#wins1").innerHTML = "Wins: " + winsCount;
+        //  document.querySelector("#wins1").innerHTML = "Wins: " + winsCount;
 
  
-}
+
