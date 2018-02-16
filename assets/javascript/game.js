@@ -16,8 +16,6 @@ var userInput = "";
 //allows the computer to select a random letter
 var computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
 
- console.log("Wins: " + winsCount + "Losses: " + lossesCount + "Guesses Left: " + guessesLeft + "Your Guesses so far: " + guessedLetters + "Computer Choice: " + computerChoice);
-
 
  //FUNCTIONS
 
@@ -41,11 +39,13 @@ var computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.leng
 //            guessesLeft--;
 //         }
 
-
+var computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
 
  document.onkeyup = function(event) {
      var userInput = String.fromCharCode(event.keyCode).toLowerCase();
-     var computerChoice = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+     console.log(userInput);
+     console.log(computerChoice);
+     //.push adds the element to the array
      guessedLetters.push(userInput);
      console.log(guessedLetters);
      document.getElementById("userguesses").innerHTML= "Your Guesses so far: " + guessedLetters.join(' , ');
